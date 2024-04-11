@@ -13,7 +13,7 @@ export class App extends Component {
     filter: '',
   };
 
-  addContact = (name, number) => {
+  addContact = ({ name, number }) => {
     const normalizeName = name.toLowerCase();
     if (normalizeName.trim() === '') {
       return;
@@ -56,11 +56,6 @@ export class App extends Component {
     this.setState({ [e.currentTarget.name]: e.currentTarget.value });
   };
 
-  handleSubmit = ({ name, number }) => {
-    this.addContact(name, number);
-    console.log(this.state.contacts);
-  };
-
   render() {
     const { filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
@@ -68,7 +63,7 @@ export class App extends Component {
       <div className={css.container}>
         <h1>Phonebook</h1>
 
-        <ContactForm submit={this.handleSubmit} />
+        <ContactForm submit={this.addContact} />
 
         <h2>Contacts</h2>
 
